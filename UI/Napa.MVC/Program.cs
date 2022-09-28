@@ -1,8 +1,22 @@
+using System.Reflection;
+using Napa.DTO.Options;
+using Napa.Interfaces;
+using Napa.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 // Add services to the container.
 services.AddControllersWithViews();
+
+//My services
+services.AddScoped<IProductService, ProductService>();
+
+//Mapper
+services.AddAutoMapper(Assembly.GetEntryAssembly());
+
+//VAT from options
+builder.Services.Configure<ConfigDetails>(builder.Configuration);
 
 var app = builder.Build();
 

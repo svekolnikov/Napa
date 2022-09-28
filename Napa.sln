@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Napa.Interfaces.Base", "Srv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Napa.Services", "Srvices\Napa.Services\Napa.Services.csproj", "{58D129B5-4840-4B20-A26A-8252B825DE6D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Napa.DTO", "Common\Napa.DTO\Napa.DTO.csproj", "{D7B7EE10-1449-4226-8670-F67353AB85AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{58D129B5-4840-4B20-A26A-8252B825DE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58D129B5-4840-4B20-A26A-8252B825DE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58D129B5-4840-4B20-A26A-8252B825DE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7B7EE10-1449-4226-8670-F67353AB85AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7B7EE10-1449-4226-8670-F67353AB85AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7B7EE10-1449-4226-8670-F67353AB85AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7B7EE10-1449-4226-8670-F67353AB85AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{8E43114B-AE30-4DBA-B159-43BF7EDA4A83} = {0040A497-011F-4BF1-88DB-53F8CFA73F2E}
 		{4E78B7D0-4A3D-4108-A870-DC30E53849B3} = {0040A497-011F-4BF1-88DB-53F8CFA73F2E}
 		{58D129B5-4840-4B20-A26A-8252B825DE6D} = {0040A497-011F-4BF1-88DB-53F8CFA73F2E}
+		{D7B7EE10-1449-4226-8670-F67353AB85AD} = {469AFA89-91CA-4E23-BEFA-B9942190FECD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9699F2EA-9D79-44B5-BAD8-8A86F9D9AC45}

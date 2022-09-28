@@ -1,25 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Napa.Interfaces;
 using Napa.MVC.ViewModels;
 
 namespace Napa.MVC.Controllers
 {
     public class ProductsController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductService _productService;
+        private readonly IMapper _mapper;
+
+        public ProductsController(IProductService productService, IMapper mapper)
         {
-            var vm = new List<ProductViewModel>
-            {
-                new(){Id = 1, Price = 345345, Quantity = 5, Title = "Samsung", PriceWithVat = 435345},
-                new(){Id = 2, Price = 45345, Quantity = 2, Title = "LG", PriceWithVat = 547452},
-            };
-            return View(vm);
+            _productService = productService;
+            _mapper = mapper;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var productsDto = await _productService.GetAllAsync();
+            var productsViewModel = _mapper.Map<List<ProductViewModel>>(productsDto);
+            return View(productsViewModel);
         }
 
         [HttpGet]
-        public IActionResult ProductCreate()
-        {
-            return View(new ProductCreateViewModel());
-        }
+        public IActionResult ProductCreate() => View(new ProductCreateViewModel());
 
         [HttpPost]
         public IActionResult ProductCreate(ProductCreateViewModel viewModel)
@@ -28,15 +32,29 @@ namespace Napa.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult ProductEdit(int id)
+        public async Task<IActionResult> ProductEdit(int id)
         {
-            return View();
+            var productDto = await _productService.GetProductByIdAsync(id);
+            var productsViewModel = _mapper.Map<ProductEditViewModel>(productDto);
+            return View(productsViewModel);
         }
 
         [HttpPost]
         public IActionResult ProductEdit(ProductEditViewModel viewModel)
         {
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult ProductDelete(int id)
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult ProductDelete(ProductEditViewModel viewModel)
+        {
+            return RedirectToAction(nameof(Index));
         }
     }
 }
