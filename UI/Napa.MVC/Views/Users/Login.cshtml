@@ -1,1 +1,32 @@
-﻿<h1>Login</h1>
+﻿@model LoginViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login";
+}
+
+<div class="container rounded shadow-lg px-4 py-5 mt-5 bg-white" style="width: 400px">
+    <form asp-controller="Users" asp-action="Login" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input hidden asp-for="ReturnUrl"/>
+        <div class="mb-2">
+            <label asp-for="Email" control-label></label>
+            <input asp-for="Email" type="email" class="form-control" aria-describedby="emailHelp"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-4">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" type="password" class="form-control"/>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-2">
+            Login
+        </button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

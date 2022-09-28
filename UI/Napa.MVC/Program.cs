@@ -1,4 +1,6 @@
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using Napa.DAL.Context;
 using Napa.DTO.Options;
 using Napa.Interfaces;
 using Napa.Services;
@@ -17,6 +19,10 @@ services.AddAutoMapper(Assembly.GetEntryAssembly());
 
 //VAT from options
 builder.Services.Configure<ConfigDetails>(builder.Configuration);
+
+//Database
+services.AddDbContext<ApplicationDbContext>(optionsAction => optionsAction
+    .UseNpgsql(builder.Configuration.GetConnectionString("PostgresSQL")));
 
 var app = builder.Build();
 

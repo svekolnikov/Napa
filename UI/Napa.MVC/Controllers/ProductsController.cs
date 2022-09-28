@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Napa.DTO;
 using Napa.Interfaces;
 using Napa.MVC.ViewModels;
 
@@ -28,6 +29,12 @@ namespace Napa.MVC.Controllers
         [HttpPost]
         public IActionResult ProductCreate(ProductCreateViewModel viewModel)
         {
+            if (!ModelState.IsValid) return View(viewModel);
+
+            var productDto = _mapper.Map<ProductDto>(viewModel);
+
+            _productService.CreateAsync(productDto);
+
             return RedirectToAction(nameof(Index));
         }
 

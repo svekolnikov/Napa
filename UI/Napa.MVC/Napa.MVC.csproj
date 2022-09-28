@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Napa.Domain\Napa.Domain.csproj" />
+    <ProjectReference Include="..\..\Data\Napa.DAL\Napa.DAL.csproj" />
     <ProjectReference Include="..\..\Srvices\Napa.Interfaces\Napa.Interfaces.csproj" />
     <ProjectReference Include="..\..\Srvices\Napa.Services\Napa.Services.csproj" />
   </ItemGroup>
