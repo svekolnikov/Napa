@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Napa.DTO;
 using Napa.Interfaces;
@@ -6,6 +7,7 @@ using Napa.MVC.ViewModels;
 
 namespace Napa.MVC.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
@@ -24,16 +26,16 @@ namespace Napa.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult ProductCreate() => View(new ProductCreateViewModel());
+        public IActionResult ProductCreate() => View(new ProductCreateEditViewModel());
 
         [HttpPost]
-        public IActionResult ProductCreate(ProductCreateViewModel viewModel)
+        public async Task<IActionResult> ProductCreate(ProductCreateEditViewModel editViewModel)
         {
-            if (!ModelState.IsValid) return View(viewModel);
+            if (!ModelState.IsValid) return View(editViewModel);
 
-            var productDto = _mapper.Map<ProductDto>(viewModel);
+            var productDto = _mapper.Map<ProductCreateEditDto>(editViewModel);
 
-            _productService.CreateAsync(productDto);
+            await _productService.CreateAsync(productDto);
 
             return RedirectToAction(nameof(Index));
         }
@@ -42,12 +44,12 @@ namespace Napa.MVC.Controllers
         public async Task<IActionResult> ProductEdit(int id)
         {
             var productDto = await _productService.GetProductByIdAsync(id);
-            var productsViewModel = _mapper.Map<ProductEditViewModel>(productDto);
+            var productsViewModel = _mapper.Map<ProductCreateEditViewModel>(productDto);
             return View(productsViewModel);
         }
 
         [HttpPost]
-        public IActionResult ProductEdit(ProductEditViewModel viewModel)
+        public IActionResult ProductEdit(ProductCreateEditViewModel viewModel)
         {
             return RedirectToAction(nameof(Index));
         }
@@ -59,8 +61,9 @@ namespace Napa.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProductDelete(ProductEditViewModel viewModel)
+        public async Task<IActionResult> ProductDeleteConfirmed(int id)
         {
+            await _productService.DeleteProductAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

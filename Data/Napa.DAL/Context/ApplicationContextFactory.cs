@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -14,7 +9,7 @@ namespace Napa.DAL.Context
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseNpgsql("Server=localhost;Database=Napa;Username=arctex;Password=arctex`123456;Port=5432");
+            optionsBuilder.UseSqlServer("Server=localhost;Database=Napa;User ID=SA;Password=Pa$$w0rd");
 
             return new ApplicationDbContext(optionsBuilder.Options);
         }

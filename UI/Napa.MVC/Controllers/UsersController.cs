@@ -14,17 +14,12 @@ namespace Napa.MVC.Controllers
         {
             _signInManager = signInManager;
         }
-        [Authorize(Roles = "Admin")]
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login(string returnUrl)
         {
-            return View(new LoginViewModel(){ReturnUrl = returnUrl});
+            return View(new LoginViewModel {ReturnUrl = returnUrl});
         }
 
         [AllowAnonymous]
@@ -47,6 +42,14 @@ namespace Napa.MVC.Controllers
             ModelState.AddModelError("", "Incorrect Username or Password");
 
             return View(viewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Login));
         }
     }
 }

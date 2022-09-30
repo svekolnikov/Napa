@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Napa.Services", "Srvices\Na
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Napa.DTO", "Common\Napa.DTO\Napa.DTO.csproj", "{D7B7EE10-1449-4226-8670-F67353AB85AD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{19D00F89-C67C-4325-9C9B-66C439151D7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Napa.ConsoleTests", "Tests\Napa.ConsoleTests\Napa.ConsoleTests.csproj", "{F42B8BAC-9F82-4378-8D28-2798064FAF16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{D7B7EE10-1449-4226-8670-F67353AB85AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7B7EE10-1449-4226-8670-F67353AB85AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7B7EE10-1449-4226-8670-F67353AB85AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F42B8BAC-9F82-4378-8D28-2798064FAF16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F42B8BAC-9F82-4378-8D28-2798064FAF16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F42B8BAC-9F82-4378-8D28-2798064FAF16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F42B8BAC-9F82-4378-8D28-2798064FAF16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,7 @@ Global
 		{4E78B7D0-4A3D-4108-A870-DC30E53849B3} = {0040A497-011F-4BF1-88DB-53F8CFA73F2E}
 		{58D129B5-4840-4B20-A26A-8252B825DE6D} = {0040A497-011F-4BF1-88DB-53F8CFA73F2E}
 		{D7B7EE10-1449-4226-8670-F67353AB85AD} = {469AFA89-91CA-4E23-BEFA-B9942190FECD}
+		{F42B8BAC-9F82-4378-8D28-2798064FAF16} = {19D00F89-C67C-4325-9C9B-66C439151D7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9699F2EA-9D79-44B5-BAD8-8A86F9D9AC45}

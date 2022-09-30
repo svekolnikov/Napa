@@ -9,8 +9,9 @@ namespace Napa.MVC.Infrastructure.Automapper
     {
         public ProductProfile()
         {
-            CreateMap<Product, ProductDto>();
+            CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<ProductDto, ProductViewModel>();
+            CreateMap<ProductCreateEditViewModel, ProductDto>();
         }
     }
 }

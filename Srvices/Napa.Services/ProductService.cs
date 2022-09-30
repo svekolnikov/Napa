@@ -6,7 +6,6 @@ using Napa.Domain.Entities;
 using Napa.DTO;
 using Napa.DTO.Options;
 using Napa.Interfaces;
-using Npgsql.TypeMapping;
 
 
 namespace Napa.Services
@@ -24,6 +23,7 @@ namespace Napa.Services
             _mapper = mapper;
 
             //VAT
+            //(Item amount * Price per item) * (1+VAT)
             //var vat = _config.Value.VAT;
         }
         public async Task<IEnumerable<ProductDto>> GetAllAsync(CancellationToken cancel = default)
@@ -34,7 +34,7 @@ namespace Napa.Services
             return dtos;
         }
 
-        public async Task CreateAsync(ProductDto dto, CancellationToken cancel = default)
+        public async Task CreateAsync(ProductCreateEditDto dto, CancellationToken cancel = default)
         {
             var product = _mapper.Map<Product>(dto);
             await _dbContext.Set<Product>().AddAsync(product, cancel).ConfigureAwait(false);
@@ -48,7 +48,7 @@ namespace Napa.Services
             return dto;
         }
         
-        public async Task UpdateProductAsync(ProductDto dto, CancellationToken cancel = default)
+        public async Task UpdateProductAsync(ProductCreateEditDto dto, CancellationToken cancel = default)
         {
             var product = _mapper.Map<Product>(dto);
             _dbContext.Entry(product).State = EntityState.Modified;
@@ -67,6 +67,11 @@ namespace Napa.Services
             await _dbContext.SaveChangesAsync(cancel);
 
             return true;
+        }
+
+        public decimal GetTotalPriceWithVat()
+        {
+            return 0;
         }
     }
 }
