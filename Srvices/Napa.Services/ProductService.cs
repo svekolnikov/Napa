@@ -15,6 +15,7 @@ namespace Napa.Services
         private readonly IOptions<ConfigDetails> _config;
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly float _vat;
 
         public ProductService(IOptions<ConfigDetails> config, ApplicationDbContext dbContext, IMapper mapper)
         {
@@ -23,8 +24,7 @@ namespace Napa.Services
             _mapper = mapper;
 
             //VAT
-            //(Item amount * Price per item) * (1+VAT)
-            //var vat = _config.Value.VAT;
+            _vat = _config.Value.VAT.Value;
         }
         public async Task<IEnumerable<ProductDto>> GetAllAsync(CancellationToken cancel = default)
         {
@@ -33,28 +33,24 @@ namespace Napa.Services
             var dtos = _mapper.Map<List<ProductDto>>(products);
             return dtos;
         }
-
         public async Task CreateAsync(ProductCreateEditDto dto, CancellationToken cancel = default)
         {
             var product = _mapper.Map<Product>(dto);
             await _dbContext.Set<Product>().AddAsync(product, cancel).ConfigureAwait(false);
             await _dbContext.SaveChangesAsync(cancel);
         }
-
-        public async Task<ProductDto> GetProductByIdAsync(int id, CancellationToken cancel = default)
+        public async Task<ProductCreateEditDto> GetProductByIdAsync(int id, CancellationToken cancel = default)
         {
             var product = await _dbContext.Products.SingleOrDefaultAsync(x => x.Id == id, cancel);
-            var dto = _mapper.Map<ProductDto>(product);
+            var dto = _mapper.Map<ProductCreateEditDto>(product);
             return dto;
         }
-        
         public async Task UpdateProductAsync(ProductCreateEditDto dto, CancellationToken cancel = default)
         {
             var product = _mapper.Map<Product>(dto);
             _dbContext.Entry(product).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync(cancel).ConfigureAwait(false);
         }
-
         public async Task<bool> DeleteProductAsync(int id, CancellationToken cancel = default)
         {
             var entity = await _dbContext.Set<Product>()
@@ -69,9 +65,11 @@ namespace Napa.Services
             return true;
         }
 
-        public decimal GetTotalPriceWithVat()
+        public decimal GetTotalPriceWithVat(int amount, decimal price)
         {
-            return 0;
+            //(Item amount * Price per item) * (1+VAT)
+            var total = amount * price * (decimal) (1 + _vat);
+            return total;
         }
     }
 }

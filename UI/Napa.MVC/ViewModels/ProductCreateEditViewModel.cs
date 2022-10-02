@@ -6,6 +6,8 @@ namespace Napa.MVC.ViewModels
 {
     public class ProductCreateEditViewModel
     {
+        public int Id { get; set; }
+
         [DisplayName("Title")]
         [StringLength(20, ErrorMessage = "Name length can't be more than 20.")]
         public string Title { get; set; } = null!;

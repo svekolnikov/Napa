@@ -49,15 +49,19 @@ namespace Napa.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProductEdit(ProductCreateEditViewModel viewModel)
+        public async Task<IActionResult> ProductEdit(ProductCreateEditViewModel viewModel)
         {
+            var dto = _mapper.Map<ProductCreateEditDto>(viewModel);
+            await _productService.UpdateProductAsync(dto);
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
-        public IActionResult ProductDelete(int id)
+        public async Task<IActionResult> ProductDelete(int id)
         {
-            return View();
+            var productDto = await _productService.GetProductByIdAsync(id);
+            var productsViewModel = _mapper.Map<ProductCreateEditViewModel>(productDto);
+            return View(productsViewModel);
         }
 
         [HttpPost]
