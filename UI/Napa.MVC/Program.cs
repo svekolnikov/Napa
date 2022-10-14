@@ -52,8 +52,9 @@ services.AddAutoMapper(Assembly.GetEntryAssembly());
 builder.Services.Configure<ConfigDetails>(builder.Configuration);
 
 //Database
+var configDb = builder.Configuration.GetConnectionString("MSSQL");
 services.AddDbContext<ApplicationDbContext>(optionsAction => optionsAction
-    .UseSqlServer(builder.Configuration.GetConnectionString("MSSQL")));
+    .UseSqlServer(configDb));
 
 var app = builder.Build();
 

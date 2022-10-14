@@ -1,0 +1,48 @@
+﻿@model ProductCreateEditViewModel
+
+@{
+    ViewData["Title"] = "Delete Product";
+    Layout = "_Layout";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div class="col-sm-3 pl-0 mb-3">
+    <dl class="row">
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-6">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-6">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+
+    <form asp-action="ProductDeleteConfirmed">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-sm btn-danger">
+            <i class="fas fa-trash-alt"></i>
+            Delete
+        </button>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to list</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
